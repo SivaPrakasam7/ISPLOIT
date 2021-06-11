@@ -363,7 +363,7 @@ def isploi(url):
             return apicall(domain,cur,request.method)
         else:
             if request.method=="GET":return apidb[-1]['html']
-            else:return apidb[-1]['json']
+            else:return json.lods(apidb[-1]['json'])
 
 if __name__=="__main__":
     app.run(debug=True)
