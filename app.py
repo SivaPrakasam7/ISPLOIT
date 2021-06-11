@@ -355,7 +355,7 @@ def isploi(url):
     domain='.'.join(url.split("://")[-1].split("/")[0].split('.')[-2:])
     apidb=[i for i in db.domains.find({'domain':domain})]
     cur=datetime.now().strftime('%m')
-    if not apidb[-1]:return apicall(domain,cur,request.method)
+    if not apidb:return apicall(domain,cur,request.method)
     else:
         if int(apidb[-1]['timestamp']) < int(cur):return apicall(domain,cur,request.method)
         else:
