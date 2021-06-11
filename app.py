@@ -346,7 +346,7 @@ db=MongoClient('mongodb+srv://siva:(#*HELPMEBRO*#)@cluster0.yudpn.mongodb.net/IS
 
 def apicall(domain,cur,mthod):
     api=INFOSPLOIT(domain,'QgvtKV5ePkrxZh3KCUhvI4RAEYhBdYsZ')
-    db.domains.insert_one({'domain':'nmap.com','json':api.rslt,'html':api.html,'timestamp':cur})
+    db.domains.insert_one({'domain':'nmap.com','json':str(api.rslt),'html':api.html,'timestamp':cur})
     if mthod=="GET":return api.html
     else:return api.rslt
 
