@@ -355,12 +355,13 @@ def isploi(url):
     domain='.'.join(url.split("://")[-1].split("/")[0].split('.')[-2:])
     apidb=[i for i in db.domains.find({'domain':domain})]
     cur=datetime.now().strftime('%m')
-    if not apidb:return apicall(domain,cur,request.method)
+    if not apidb[-1]:return apicall(domain,cur,request.method)
     else:
-        if apidb[-1]['timestamp'] < cur:return apicall(domain,cur,request.method)
+        if int(apidb[-1]['timestamp']) < int(cur):return apicall(domain,cur,request.method)
         else:
+            db.domains.delete_one(apidb[-1])
             if request.method=="GET":return apidb[-1]['html']
-            else:apidb[-1]['json']
+            else:return apidb[-1]['json']
 
 if __name__=="__main__":
     app.run(debug=True)
