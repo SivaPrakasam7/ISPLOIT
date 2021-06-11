@@ -343,18 +343,21 @@ app=Flask(__name__)
 app.secret_key = "&^$^*InfoSploit82738"
 db=MongoClient('mongodb+srv://siva:(#*HELPMEBRO*#)@cluster0.yudpn.mongodb.net/ISPLOIT?retryWrites=true&w=majority').isploit
 
+def apicall(domain,cur):
+    api=INFOSPLOIT(domain,'QgvtKV5ePkrxZh3KCUhvI4RAEYhBdYsZ')
+    db.domains.insert_one({'domain':'nmap.com','json':api.rslt,'html':api.html,'timestamp':cur})
+    return api.html
+
 # Speed up process now take 1 min to complete result
 @app.route('/<request>')
 def isploi(request):
     domain='.'.join(request.split("://")[-1].split("/")[0].split('.')[-2:])
-    apidb=[i for i in db.domains.find({'domain':domain})][-1]
-    apidb.pop('_id')
+    apidb=[i for i in db.domains.find({'domain':domain})]
     cur=datetime.now().strftime('%m')
-    if not apidb and apidb['timestamp'] < cur:
-        api=INFOSPLOIT(domain,'QgvtKV5ePkrxZh3KCUhvI4RAEYhBdYsZ')
-        db.domains.insert_one({'domain':'nmap.com','json':api.rslt,'html':api.html,'timestamp':cur})
-        return api.html
-    else:return apidb['html']
+    if not apidb:return apicall(domain,cur)
+    else:
+        if apidb['timestamp'] < cur:return apicall(domain,cur)
+        else:return apidb['html']
 
 if __name__=="__main__":
     app.run(debug=True)
