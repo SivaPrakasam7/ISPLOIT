@@ -357,9 +357,10 @@ def isploi(url):
     cur=datetime.now().strftime('%m')
     if not apidb:return apicall(domain,cur,request.method)
     else:
-        if int(apidb[-1]['timestamp']) < int(cur):return apicall(domain,cur,request.method)
-        else:
+        if int(apidb[-1]['timestamp']) < int(cur):
             db.domains.delete_one(apidb[-1])
+            return apicall(domain,cur,request.method)
+        else:
             if request.method=="GET":return apidb[-1]['html']
             else:return apidb[-1]['json']
 
