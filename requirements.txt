@@ -11,6 +11,7 @@ shodan
 phonenumbers
 datetime
 bs4
+html5lib
 requests
 python-whois
 python3-nmap
