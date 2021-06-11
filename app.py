@@ -347,14 +347,14 @@ db=MongoClient('mongodb+srv://siva:(#*HELPMEBRO*#)@cluster0.yudpn.mongodb.net/IS
 @app.route('/<request>')
 def isploi(request):
     domain='.'.join(request.split("://")[-1].split("/")[0].split('.')[-2:])
-    apidb=db.domains.find({'domain':domain})
+    apidb=[i for i in db.domains.find({'domain':domain})][-1]
     apidb.pop('_id')
     cur=datetime.now().strftime('%m')
     if not apidb and apidb['timestamp'] < cur:
         api=INFOSPLOIT(domain,'QgvtKV5ePkrxZh3KCUhvI4RAEYhBdYsZ')
         db.domains.insert_one({'domain':'nmap.com','json':api.rslt,'html':api.html,'timestamp':cur})
         return api.html
-    else:return apidb
+    else:return apidb['html']
 
 if __name__=="__main__":
     app.run(debug=True)
