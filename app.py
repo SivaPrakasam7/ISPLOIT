@@ -307,11 +307,12 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
             });
         });
         '''
-        self.URL=self.rslt.pop('URL')
+        temp=copy.copy(self.rslt)
+        self.URL=temp.pop('URL')
         self.rtemplate=self.URL.pop('Render')
-        self.SHODAND=self.rslt.pop('Shodan')
+        self.SHODAND=temp.pop('Shodan')
         self.f=0
-        first=self.template(self.rslt[list(self.rslt.keys())[0]],self.rslt)
+        first=self.template(temp[list(temp.keys())[0]],temp)
         self.f=0
         second=self.template(self.URL[list(self.URL.keys())[0]],self.URL)
         self.f=0
