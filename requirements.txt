@@ -13,5 +13,4 @@ datetime
 bs4
 requests
 python-whois
-pycopy-copy
 python3-nmap
