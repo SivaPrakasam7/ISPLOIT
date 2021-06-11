@@ -1,0 +1,17 @@
+Flask
+gunicorn
+nslookup
+cymruwhois
+Sublist3r
+dnspython
+pymongo
+regex
+scapy
+shodan
+phonenumbers
+datetime
+bs4
+requests
+python-whois
+pycopy-copy
+python3-nmap
