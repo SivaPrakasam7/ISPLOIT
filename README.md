@@ -36,4 +36,4 @@ Server information
 URL information
 <img src="static/url information.png">
 Shodan information
-<img src="static/shodan information.png>
+<img src="static/shodan information.png">
