@@ -53,7 +53,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
     def __init__(self,url,key):
         self.cm=COMMON()
         self.key=key
-        if self.key != None:self.process=[self.DNS,self.SUBDOMAIN,self.WHOIS,self.NMAP,self.URL,self.SHODAN]
+        if self.key != 'none':self.process=[self.DNS,self.SUBDOMAIN,self.WHOIS,self.NMAP,self.URL,self.SHODAN]
         else:self.process=[self.DNS,self.SUBDOMAIN,self.WHOIS,self.NMAP,self.URL]
         self.hlp={'IPv6':'AAAA','Name Server':'NS','Mail Exchangers':'MX','Start of Authority':'SOA','Text':'TXT'}
         for rp in re.findall(r'^https?://',url):url=url.replace(rp,"")
@@ -71,7 +71,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         for t in thread:
             while t.is_alive():pass
         self.rslt['Error Domains']=self.cm.errordomain
-        # open('test.json','w').write(json.dumps(self.rslt,indent=4))
+        # open(f'{self.domain}.json','w').write(json.dumps(self.rslt,indent=4))
         self.view()
 
     def DNS(self): # Domain Infomation manual
@@ -347,8 +347,8 @@ app=Flask(__name__)
 app.secret_key = "&^$^*InfoSploit82738"
 db=MongoClient('mongodb+srv://siva:(#*HELPMEBRO*#)@cluster0.yudpn.mongodb.net/ISPLOIT?retryWrites=true&w=majority').isploit
 
-def apicall(domain,cur,mthod):
-    api=INFOSPLOIT(domain,'QgvtKV5ePkrxZh3KCUhvI4RAEYhBdYsZ')
+def apicall(domain,cur,mthod,key):
+    api=INFOSPLOIT(domain,key)
     db.domains.insert_one({'domain':domain,'json':str(api.rslt),'html':api.html,'timestamp':cur})
     if mthod=="GET":return api.html
     else:return api.rslt
@@ -359,21 +359,20 @@ def index():
     if request.method=="GET":return apidb[-1]['html']
     else:return apidb[-1]['json']
 
-
 # Speed up process now take 1 min to complete result
-@app.route('/<url>',methods=['GET','POST'])
-def isploi(url):
+@app.route('/<url>/<key>',methods=['GET','POST'])
+def isploi(url,key):
     domain='.'.join(url.split("://")[-1].split("/")[0].split('.')[-2:])
     apidb=[i for i in db.domains.find({'domain':domain})]
     cur=datetime.now().strftime('%m')
-    if not apidb:return apicall(domain,cur,request.method)
+    if not apidb:return apicall(domain,cur,request.method,key)
     else:
         if int(apidb[-1]['timestamp']) < int(cur):
             db.domains.delete_one(apidb[-1])
-            return apicall(domain,cur,request.method)
+            return apicall(domain,cur,request.method,key)
         else:
             if request.method=="GET":return apidb[-1]['html']
             else:return apidb[-1]['json']
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(port=5001)
