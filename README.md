@@ -4,6 +4,7 @@
 
 Information exploit of Target domain. It's a api gethering information and records of webserver. It provide some exploits suggesstions with open port information and scrapping some useful information from the hosted sites. deployed at https://isploit.herokuapp.com/{target-domain}/{shodanapikey}
 
+
 RUN
 ---
     root# python3 app.py
@@ -13,14 +14,12 @@ RUN
     Use a production WSGI server instead.
     * Debug mode: on
     * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
-    * Restarting with stat
-    * Debugger is active!
-    * Debugger PIN: 709-229-024
+    
 
 USE
 ---
 
-LOCAL URL - http://127.0.0.1:5001/{target-url}/{(Shodan api-key) or (none)}
+LOCAL URL - http://127.0.0.1:5000/{target-url}/{(Shodan api-key) or (none)}
 
 GLOBAL URL - https://isploit.herokuapp.com/{target-url}/{shodan api-key}
 
