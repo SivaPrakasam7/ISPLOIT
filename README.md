@@ -4,6 +4,7 @@
 
 Information exploit of Target domain. It's a api gethering information and records of webserver. It provide some exploits suggesstions with open port information and scrapping some useful information from the hosted sites. deployed at https://isploit.herokuapp.com/{target-domain}/{shodanapikey}
 
+note: To collect server and site information take some time between 1-2 mins, I will improve performance of this API. 
 
 RUN
 ---
