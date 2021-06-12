@@ -19,12 +19,13 @@ RUN
 
 USE
 ---
-    URL - http://127.0.0.1:5001/{target-url}/{(Shodan api-key) or (none)}
 
-    For Shodan API-KEY login this link <a href="https://www.shodan.io">shodan.io</a>
+URL - http://127.0.0.1:5001/{target-url}/{(Shodan api-key) or (none)}
 
-    GET method - URL in browser
-    POST method - Return json data
-        requests.post('URL')
+For Shodan API-KEY login this link <a href="https://www.shodan.io">shodan.io</a>
 
-    This API Also deployed in <a href="https://isploit.herokuapp.com">isploit.herokuapp.com</a>
+GET method - URL in browser
+POST method - Return json data
+    requests.post('URL')
+
+This API Also deployed in <a href="https://isploit.herokuapp.com">isploit.herokuapp.com</a>
