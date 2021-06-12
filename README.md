@@ -1,4 +1,3 @@
-![Alt text](static/logo.svg)
 <img style='align-self:center;margin:auto;' src="static/logo.svg">
 
 # Description
