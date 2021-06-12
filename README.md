@@ -1,4 +1,4 @@
-<img src="static/logo.png" style="width:10rem;height:10rem;">
+<img src="static/logo.png">
 
 # Description
 
@@ -14,7 +14,7 @@ RUN
     Use a production WSGI server instead.
     * Debug mode: on
     * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
-    
+
 
 USE
 ---
@@ -28,3 +28,12 @@ For Shodan API-KEY login this link <a href="https://www.shodan.io">shodan.io</a>
 GET method - URL in browser
 POST method - Return json data
     requests.post('URL')
+
+SCREEN SHOTS
+---
+Server information
+<img src="static/server information.png">
+URL information
+<img src="static/url information.png">
+Shodan information
+<img src="static/shodan information.png>
