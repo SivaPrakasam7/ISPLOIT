@@ -2,7 +2,7 @@
 
 # Description
 
-Information exploit of Target domain. It's a api gethering information and records of webserver. It provide some exploits suggesstions with open port information and scrapping some useful information from the hosted sites. deployed at http://isploit.herokuapp.com/{target-domain}/{shodanapikey}
+Information exploit of Target domain. It's a api gethering information and records of webserver. It provide some exploits suggesstions with open port information and scrapping some useful information from the hosted sites. deployed at https://isploit.herokuapp.com/{target-domain}/{shodanapikey}
 
 RUN
 ---
@@ -20,12 +20,12 @@ RUN
 USE
 ---
 
-URL - http://127.0.0.1:5001/{target-url}/{(Shodan api-key) or (none)}
+LOCAL URL - http://127.0.0.1:5001/{target-url}/{(Shodan api-key) or (none)}
+
+GLOBAL URL - https://isploit.herokuapp.com/{target-url}/{shodan api-key}
 
 For Shodan API-KEY login this link <a href="https://www.shodan.io">shodan.io</a>
 
 GET method - URL in browser
 POST method - Return json data
     requests.post('URL')
-
-This API Also deployed in <a href="https://isploit.herokuapp.com">isploit.herokuapp.com</a>
