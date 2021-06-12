@@ -1,5 +1,5 @@
 #!/bin/bash
-from flask import Flask
+from flask import Flask,redirect,url_for
 from flask.globals import request
 from nslookup import Nslookup
 from datetime import datetime
@@ -78,9 +78,9 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         dns=Nslookup(dns_servers=['1.1.1.1','8.8.8.8','8.8.0.0'])
         for k,v in self.hlp.items():
             record=dns.base_lookup(self.domain,v)
-            self.rslt[k]=[str(r) for r in record.rrset]
+            self.rslt[k]=self.cm.handle(record,"[str(r) for r in var.rrset]")
         self.rslt['Domain']=self.domain
-        self.rslt['Canonical Name']=str(record.canonical_name)
+        self.rslt['Canonical Name']=self.cm.handle(record,"str(var.canonical_name)")
         self.rslt['Top level domain']=self.domain.split('.')[-1]
         self.rslt['Secondary level domain']=self.domain.split('.')[-2]
         self.rslt['Routes']=[f'{snd.ttl} {rcv.src}' for snd, rcv in traceroute(self.rslt['IPv4'], maxttl=10,verbose=False)[0]]
@@ -103,9 +103,12 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         self.rslt['Country']=dt['country']
         self.rslt['State']=dt['state']
         self.rslt['Zipcode']=dt['zipcode']
-        self.rslt['Creation Date']=[i.strftime('%D:%H:%M:%S') for i in dt['creation_date']]
-        self.rslt['Updated Date']=[i.strftime('%D:%H:%M:%S') for i in dt['updated_date']]
-        self.rslt['Expiration Date']=[i.strftime('%D:%H:%M:%S') for i in dt['expiration_date']]
+        try:self.rslt['Creation Date']=[i.strftime('%D:%H:%M:%S') for i in dt['creation_date']]
+        except:self.rslt['Creation Date']=dt['creation_date']
+        try:self.rslt['Updated Date']=[i.strftime('%D:%H:%M:%S') for i in dt['updated_date']]
+        except:self.rslt['Updated Date']=dt['updated_date']
+        try:self.rslt['Expiration Date']=[i.strftime('%D:%H:%M:%S') for i in dt['expiration_date']]
+        except:dt['expiration_date']
         self.rslt['Status']=dt['status']
         self.rslt['Referral url']=dt['referral_url']
 
@@ -346,9 +349,16 @@ db=MongoClient('mongodb+srv://siva:(#*HELPMEBRO*#)@cluster0.yudpn.mongodb.net/IS
 
 def apicall(domain,cur,mthod):
     api=INFOSPLOIT(domain,'QgvtKV5ePkrxZh3KCUhvI4RAEYhBdYsZ')
-    db.domains.insert_one({'domain':'nmap.com','json':str(api.rslt),'html':api.html,'timestamp':cur})
+    db.domains.insert_one({'domain':domain,'json':str(api.rslt),'html':api.html,'timestamp':cur})
     if mthod=="GET":return api.html
     else:return api.rslt
+
+@app.route('/',methods=['GET','POST'])
+def index():
+    apidb=[i for i in db.domains.find({'domain':'nmap.com'})]
+    if request.method=="GET":return apidb[-1]['html']
+    else:return apidb[-1]['json']
+
 
 # Speed up process now take 1 min to complete result
 @app.route('/<url>',methods=['GET','POST'])
