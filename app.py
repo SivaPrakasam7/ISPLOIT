@@ -121,7 +121,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
             self.rslt['Ports'].append({'Port':p['portid'],'Name':p['service']['name'],'Service':service,'Protocol':p['protocol'],'Exploits Suggestions':self.search(service)})
 
     def NMAP(self):
-        subprocess.call('./static/nmap -sV scanme.nmap.org -oX temp.xml')
+        subprocess.call('~/static/nmap -sV scanme.nmap.org -oX temp.xml',shell=True)
         self.rslt['Ports']=list()
         for p in eval(str(json.loads(json.dumps(xmltodict.parse(open('temp.xml','r').read().replace('@',''))))).replace('@',''))['nmaprun']['host']['ports']['port']:
             service='{} {}'.format(self.cm.handle(p,"var['service']['product']"),self.cm.handle(p,"var['service']['version']")).replace("None", "").strip()
