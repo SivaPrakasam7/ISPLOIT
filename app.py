@@ -60,7 +60,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         self.domain='.'.join(self.url.split("://")[-1].split("/")[0].split('.')[-2:])
         self.rslt={'IPv4':socket.gethostbyname(self.domain),'IPv6':list(),'Name Server':list(),'Mail Exchangers':list(),'Start of Authority':list(),'Text':list(),'Subdomains':list()}
         self.Start()
-set nmap PATH in heroku
+
     def Start(self):
         thread=[]
         for p in self.process:
