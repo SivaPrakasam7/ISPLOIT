@@ -1,4 +1,5 @@
 #!/bin/bash
+import subprocess
 from flask import Flask,redirect,url_for
 from flask.globals import request
 from nslookup import Nslookup
@@ -22,7 +23,7 @@ import copy
 import re
 import xmltodict
 import json
-import os
+import subprocess
 
 class COMMON:# Common function for all classes
     def __init__(self):
@@ -120,7 +121,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
             self.rslt['Ports'].append({'Port':p['portid'],'Name':p['service']['name'],'Service':service,'Protocol':p['protocol'],'Exploits Suggestions':self.search(service)})
 
     def NMAP(self):
-        os.system('./static/nmap -sV scanme.nmap.org -oX temp.xml')
+        subprocess.call('./static/nmap -sV scanme.nmap.org -oX temp.xml')
         self.rslt['Ports']=list()
         for p in eval(str(json.loads(json.dumps(xmltodict.parse(open('temp.xml','r').read().replace('@',''))))).replace('@',''))['nmaprun']['host']['ports']['port']:
             service='{} {}'.format(self.cm.handle(p,"var['service']['product']"),self.cm.handle(p,"var['service']['version']")).replace("None", "").strip()
