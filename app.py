@@ -21,7 +21,7 @@ import phonenumbers
 import copy
 import re
 import json
-
+import os
 
 class COMMON:# Common function for all classes
     def __init__(self):
@@ -61,7 +61,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         self.domain='.'.join(self.url.split("://")[-1].split("/")[0].split('.')[-2:])
         self.rslt={'IPv4':socket.gethostbyname(self.domain),'IPv6':list(),'Name Server':list(),'Mail Exchangers':list(),'Start of Authority':list(),'Text':list(),'Subdomains':list()}
         self.Start()
-
+set nmap PATH in heroku
     def Start(self):
         thread=[]
         for p in self.process:
@@ -375,4 +375,5 @@ def isploi(url,key):
             else:return apidb[-1]['json']
 
 if __name__=="__main__":
+    os.system('export PATH=$PATH:/app/nmap/bin')
     app.run()
