@@ -260,7 +260,13 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
                 padding:0.5rem;
             }
             li{
-                padding:0.5rem;
+                border: solid 1px var(--mcolor);
+                border-radius: 0.2rem;
+                width: fit-content;
+                padding: 0.5rem;
+                float: left;
+                margin: 0.3rem;
+                list-style-type: none;
             }
             .arrow {
                 border: solid var(--mcolor);
