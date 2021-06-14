@@ -21,7 +21,6 @@ import phonenumbers
 import copy
 import re
 import json
-import os
 
 class COMMON:# Common function for all classes
     def __init__(self):
