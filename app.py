@@ -375,5 +375,4 @@ def isploi(url,key):
             else:return apidb[-1]['json']
 
 if __name__=="__main__":
-    os.system('export PATH=$PATH:/app/nmap/bin')
     app.run()
