@@ -8,6 +8,11 @@ Information exploit of Target domain. It's a api gethering information and recor
 
 note: To collect server and site information take some time between 1-2 mins, I will improve performance of this API. 
 
+REQUIREMENTS
+---
+
+    root# pip3 install requirements.txt
+
 RUN
 ---
     root# python3 app.py
