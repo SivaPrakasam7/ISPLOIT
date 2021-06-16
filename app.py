@@ -114,13 +114,13 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         self.rslt['Status']=dt['status']
         self.rslt['Referral url']=dt['referral_url']
 
-    def NMAP1(self): # Edit here only valuable information gather from the nmap result
+    def NMAP(self): # Edit here only valuable information gather from the nmap result
         self.rslt['Ports']=list()
         for p in nmap3.NmapScanTechniques().nmap_tcp_scan(self.rslt['IPv4'],args='-sV')[self.rslt['IPv4']]['ports']:
             service='{} {}'.format(self.cm.handle(p,"var['service']['product']"),self.cm.handle(p,"var['service']['version']")).replace("None", "").strip()
             self.rslt['Ports'].append({'Port':p['portid'],'Name':p['service']['name'],'Service':service,'Protocol':p['protocol'],'Exploits Suggestions':self.search(service)})
 
-    def NMAP(self):
+    def NMAP1(self):
         subprocess.call('~/static/nmap -sV scanme.nmap.org -oX temp.xml',shell=True)
         self.rslt['Ports']=list()
         for p in eval(str(json.loads(json.dumps(xmltodict.parse(open('temp.xml','r').read().replace('@',''))))).replace('@',''))['nmaprun']['host']['ports']['port']:
