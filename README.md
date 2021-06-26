@@ -11,7 +11,7 @@ note: To collect server and site information take some time between 1-2 mins, I 
 REQUIREMENTS
 ---
 
-    root# pip3 install requirements.txt
+    root# pip3 install -r requirements.txt
 
 RUN
 ---
