@@ -20,6 +20,7 @@ import nmap3
 import whois
 import phonenumbers
 import copy
+import os
 import re
 import xmltodict
 import json
@@ -360,7 +361,7 @@ class INFOSPLOIT: # Fully manual mode info collector of given link
         
 app=Flask(__name__)
 app.secret_key = "&^$^*InfoSploit82738"
-db=MongoClient('mongodb+srv://siva:(#*HELPMEBRO*#)@cluster0.yudpn.mongodb.net/ISPLOIT?retryWrites=true&w=majority').isploit
+db=MongoClient(os.environ.get('DB')).isploit
 
 def apicall(domain,cur,mthod,key):
     api=INFOSPLOIT(domain,key)
